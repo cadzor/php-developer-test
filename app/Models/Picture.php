@@ -14,6 +14,7 @@ class Picture extends Model
         'date',
         'url',
         'hdurl',
+        'thumbs',
         'media_type',
         'explanation',
         'copyright'

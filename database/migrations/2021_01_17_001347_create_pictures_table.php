@@ -19,6 +19,7 @@ class CreatePicturesTable extends Migration
             $table->date('date');
             $table->string('url');
             $table->string('hdurl');
+            $table->string('thumbs');
             $table->string('media_type');
             $table->longText('explanation');
             $table->string('copyright');

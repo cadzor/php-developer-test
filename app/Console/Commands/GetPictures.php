@@ -14,7 +14,7 @@ class GetPictures extends Command
      *
      * @var string
      */
-    protected $signature = 'getpictures';
+    protected $signature = 'GetPictures';
 
     /**
      * The console command description.
@@ -41,21 +41,22 @@ class GetPictures extends Command
     public function handle()
     {
         $today = Carbon::today()->format('Y-m-d');
-        $monthAgo = Carbon::today()->subDays(30)->format('Y-m-d');
+        $monthAgo = Carbon::today()->subMonth()->format('Y-m-d');
 
         $client = new Client();
-        $res = $client->request('GET', 'https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&start_date='.$monthAgo.'&end_date='.$today);
+        $res = $client->request('GET', 'https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&thumbs=true&start_date='.$monthAgo.'&end_date='.$today);
         $resBody = json_decode($res->getBody());
     
         foreach ($resBody as $picture) {
             Picture::updateOrCreate([
-                'title' => (!empty($picture->title)) ? $picture->title : 'No title',
-                'date' => $picture->date,
-                'url' => $picture->url,
-                'hdurl' => (!empty($picture->hdurl)) ? $picture->hdurl : $picture->url,
-                'media_type' => $picture->media_type,
-                'explanation' => (!empty($picture->explanation)) ? $picture->explanation : '',
-                'copyright' => (!empty($picture->copyright)) ? $picture->copyright : ''
+                'title' => $picture->title ?? '',
+                'date' => $picture->date ?? '',
+                'url' => $picture->url ?? '',
+                'hdurl' => $picture->hdurl ?? '',
+                'thumbs' => $picture->thumbnail_url ?? '',
+                'media_type' => $picture->media_type ?? '',
+                'explanation' => $picture->explanation ?? '',
+                'copyright' => $picture->copyright ?? ''
             ]);
         }
     }
