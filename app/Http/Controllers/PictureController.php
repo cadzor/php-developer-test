@@ -18,14 +18,13 @@ class PictureController extends Controller
             $potd = Picture::orderBy('date', 'desc')->first();
         }
         
-        $otherPics = Picture::orderBy('date', 'desc')->where('date', '!=', $potd->date)->take(29)->get();
+        $otherPics = Picture::orderBy('date', 'desc')->where('date', '!=', $potd->date)->simplePaginate(3);
     
         return view('index', compact('potd', 'otherPics'));
     }
 
     public function show($id) {
         $picture = Picture::findOrFail($id);
-
         return view('show', compact('picture'));
     }
 

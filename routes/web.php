@@ -15,3 +15,4 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'App\Http\Controllers\PictureController@index')->name('Index');
+Route::get('/show/{id}', 'App\Http\Controllers\PictureController@show')->name('Show');
