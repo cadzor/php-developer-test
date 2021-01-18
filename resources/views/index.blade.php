@@ -40,6 +40,11 @@
                                 @endif
                             <div class="card-body">
                                 <h5 class="card-text" style="color: blue;">{{$picture->date}}</h5>
+                                @if($picture->media_type === 'image')
+                                <h6 class="card-text" style="color: blue;">Image</h6>
+                                @else
+                                <h6 class="card-text" style="color: blue;">Video</h6>
+                                @endif
                                 <p class="card-text">{{$picture->title}}</p>
                             </div>
                         </div>
