@@ -25,7 +25,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        // Make a GET request to NASA API every 5 minutes, to be cron'd
         $schedule->command('GetPictures')->everyFiveMinutes();
     }
 

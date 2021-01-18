@@ -47,13 +47,7 @@
                         </div>
                     @endforeach
                 </div>
-                <div class="row justify-content-center">
-                @if(!empty($otherPics->links()))
-                    <nav aria-label="pagenav">
-                        {{$otherPics->links()}}
-                    </nav>
-                @endif
-                </div>
+               
             </div>
         </div>
 

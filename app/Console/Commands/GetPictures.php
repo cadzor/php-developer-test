@@ -40,13 +40,18 @@ class GetPictures extends Command
      */
     public function handle()
     {
+
+        // Get today and a month ago
         $today = Carbon::today()->format('Y-m-d');
         $monthAgo = Carbon::today()->subMonth()->format('Y-m-d');
 
+        // GET request to NASA APOD API via Guzzle
         $client = new Client();
         $res = $client->request('GET', 'https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&thumbs=true&start_date='.$monthAgo.'&end_date='.$today);
         $resBody = json_decode($res->getBody());
     
+
+        // Loop through different objects returned from API, create if new, otherwise ignore/update
         foreach ($resBody as $picture) {
             Picture::updateOrCreate([
                 'title' => $picture->title ?? '',

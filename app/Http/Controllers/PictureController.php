@@ -11,6 +11,7 @@ class PictureController extends Controller
 {
     public function index() {
 
+        // Get the picture of the day, if today hasn't been uploaded yet, get last
         $today = Carbon::today()->format('Y-m-d');
         $potd = Picture::where('date', $today)->first();
 
@@ -18,8 +19,9 @@ class PictureController extends Controller
             $potd = Picture::orderBy('date', 'desc')->first();
         }
         
-        $otherPics = Picture::orderBy('date', 'desc')->where('date', '!=', $potd->date)->simplePaginate(3);
-    
+        // Get 30 pictures in desc order (date) which isn't the current POTD
+        $otherPics = Picture::where('date', '!=', $potd->date)->orderBy('date', 'desc')->take(30)->get();
+
         return view('index', compact('potd', 'otherPics'));
     }
 
