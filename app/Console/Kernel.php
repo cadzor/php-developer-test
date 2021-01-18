@@ -25,8 +25,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // Make a GET request to NASA API every 5 minutes, to be cron'd
-        $schedule->command('GetPictures')->everyFiveMinutes();
+        // Make a GET request to NASA API every 30 minutes
+        $schedule->command('GetPictures')->everyThirtyMinutes();
     }
 
     /**

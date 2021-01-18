@@ -7,7 +7,7 @@ use Carbon\Carbon;
 use GuzzleHttp\Client;
 use App\Models\Picture;
 
-class PictureController extends Controller
+class PictureController extends Controller      
 {
     public function index() {
 
